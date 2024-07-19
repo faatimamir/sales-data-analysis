@@ -7,7 +7,7 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-genai.configure(api_key='AIzaSyDbTo4knGFw52--xAsOTzep3Kqt1AMPDbU')
+genai.configure(api_key='add your api key')
 model = genai.GenerativeModel('gemini-1.5-flash')
 chat = model.start_chat(history=[])
 
