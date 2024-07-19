@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Analysis</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <h1>Sales Analysis Using LLM</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="file">Upload Sales Data (XLSX):</label>
+        <input type="file" id="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+    <div id="message"></div>
+
+    <button id="getFeedbackBtn">Get Performance Feedback</button>
+    <button id="getTeamPerformanceBtn">Get Team Performance</button>
+    <button id="getSalesTrendsBtn">Get Sales Trends and Forecasting</button>
+    <div id="analysisResult"></div>
+
+    <!-- Loading spinner -->
+    <div id="loading" class="loading" style="display: none;">Loading...</div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            showLoading(true);
+            const response = await fetch('/api/load_data', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            showLoading(false);
+            document.getElementById('message').innerText = result.message || result.error;
+        });
+
+        document.getElementById('getFeedbackBtn').addEventListener('click', async function () {
+            const unitId = prompt("Enter unit ID:");
+            if (unitId) {
+                showLoading(true);
+                const response = await fetch(`/api/performance_feedback?unit_id=${unitId}`);
+                const result = await response.json();
+                showLoading(false);
+                document.getElementById('analysisResult').innerText = result.feedback || result.error;
+            }
+        });
+
+        document.getElementById('getTeamPerformanceBtn').addEventListener('click', async function () {
+            showLoading(true);
+            const response = await fetch('/api/team_performance');
+            const result = await response.json();
+            showLoading(false);
+            document.getElementById('analysisResult').innerText = result.performance || result.error;
+        });
+
+        document.getElementById('getSalesTrendsBtn').addEventListener('click', async function () {
+            showLoading(true);
+            const response = await fetch('/api/sales_trends');
+            const result = await response.json();
+            showLoading(false);
+            document.getElementById('analysisResult').innerText = result.results.llm_response || result.error;
+        });
+
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            loading.style.display = show ? 'block' : 'none';
+        }
+    </script>
+</body>
+
+</html>

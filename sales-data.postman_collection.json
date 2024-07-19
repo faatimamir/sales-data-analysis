@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "85f5bcba-2df2-4a02-b179-40c50239667a",
+		"name": "sales-data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27657774"
+	},
+	"item": [
+		{
+			"name": "load-data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/faati/OneDrive/Desktop/sales analysis/data for Tanvi.xlsx"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/load_data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"load_data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "team-performance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/team_performance",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"team_performance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unit-performance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/performance_feedback?unit_id=1916",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"performance_feedback"
+					],
+					"query": [
+						{
+							"key": "unit_id",
+							"value": "1916"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sales-trend",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/sales_trends",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"sales_trends"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
